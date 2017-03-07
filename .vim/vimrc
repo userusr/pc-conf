@@ -1,0 +1,200 @@
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" common
+Plugin 'scrooloose/nerdtree'
+"Plugin 'valloric/youcompleteme'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-fugitive'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'matze/vim-move'
+Plugin 'raimondi/delimitmate'
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+" Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
+Plugin 'SyntaxAttr.vim'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'rking/ag.vim'
+Plugin 'godlygeek/tabular'
+
+" javascript
+Plugin 'pangloss/vim-javascript'
+
+" html
+Plugin 'othree/html5.vim'
+
+" twig
+Plugin 'evidens/vim-twig'
+
+" perl
+Plugin 'vim-perl/vim-perl'
+Plugin 'yko/mojo.vim'
+Plugin 'perl-support.vim'
+
+" css
+Plugin 'mtscout6/vim-tagbar-css'
+
+" colors
+Plugin 'damage220/solas.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'mhartington/oceanic-next'
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+
+" settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoread
+set autoindent
+set smartindent
+set rnu
+set laststatus=2
+set timeoutlen=500
+set ttimeoutlen=0
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+set encoding=utf-8
+set termencoding=utf-8
+set updatetime=500
+set noswapfile
+set splitright
+set splitbelow
+set nocompatible
+set tags=~/.vim/tags;
+set ignorecase
+set hidden
+set hlsearch
+set incsearch
+set cursorline
+set pumheight=10
+set fillchars+=vert:\ 
+let mapleader=","
+filetype off
+filetype plugin on
+filetype plugin indent on
+" autocmd CompleteDone * pclose
+
+" color
+syntax on
+let g:solarized_termcolors=256
+set t_Co=256 
+set background=light
+" set background=dark
+colorscheme solarized
+
+" abbreviations
+abbr help tab help
+
+" airline
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_section_warning = ''
+let g:airline_section_error = ''
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" easymotion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_shade = 0
+hi link EasyMotionTarget Search
+hi EasyMotionTarget2First ctermfg=202 ctermbg=None cterm=None
+hi EasyMotionTarget2Second ctermfg=202 ctermbg=None cterm=None
+
+" session
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 5
+let g:session_autosave_silent = 1
+let g:session_default_to_last = 1
+
+" tagbar
+let g:tagbar_sort = 0
+let g:tagbar_width = 35
+let g:tagbar_iconchars = ['+', '-']
+let g:tagbar_map_close = '<C-m>'
+let g:tagbar_type_javascript = {
+\'ctagstype':'JavaScript',
+	\'kinds' : [
+		\'f:functions',
+		\'c:classes',
+		\'m:methods',
+		\'p:properties'
+	\]
+\}
+
+" map <alt+n> to navigate through tabs
+for c in range(1, 9)
+	exec "set <A-".c.">=\e".c
+	exec "map \e".c." <A-".c.">"
+	let n = c - '0'
+	exec "map <M-". n ."> ". n ."gt"
+endfor
+
+" delimitmate
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
+
+" ctrlp
+let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 'wr'
+let g:ctrlp_map = ''
+let g:ctrlp_buftag_types = {
+	\'php': '--php-kinds=icdf'
+\}
+
+" ctrlsf
+let g:ctrlsf_position = 'right'
+
+" easytags
+let g:easytags_file = '~/.vim/tags'
+let g:easytags_auto_highlight = 0
+let g:easytags_events = ['BufWritePost']
+let g:easytags_async = 1
+
+" move
+let g:move_key_modifier = 'C'
+
+" nerdtree
+let NERDTreeAutoDeleteBuffer = 1
+
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+nnoremap <F4> :tabe ~/.vim/vimrc<CR>:tabm 0<CR>
+nnoremap <C-m> :TagbarToggle<CR>
+nnoremap <C-p> :NERDTreeToggle<CR>
+nmap fs <Plug>(easymotion-s)
+nmap fl <Plug>(easymotion-sl)
+map <C-?> <plug>NERDCommenterComment
+map <C-_> <plug>NERDCommenterToggle
+
+
