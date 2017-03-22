@@ -8,7 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " common
 Plugin 'scrooloose/nerdtree'
-"Plugin 'valloric/youcompleteme'
+Plugin 'valloric/youcompleteme'
 Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
@@ -193,7 +193,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-nnoremap <F4> :tabe ~/.vim/vimrc<CR>:tabm 0<CR>
+nnoremap <F4> :tabe ~/.vimrc<CR>:tabm 0<CR>
 nnoremap <C-m> :TagbarToggle<CR>
 nnoremap <C-p> :NERDTreeToggle<CR>
 nmap fs <Plug>(easymotion-s)
@@ -201,4 +201,21 @@ nmap fl <Plug>(easymotion-sl)
 map <C-?> <plug>NERDCommenterComment
 map <C-_> <plug>NERDCommenterToggle
 
+" https://stackoverflow.com/questions/2345519/how-can-i-script-vim-to-run-perltidy-on-a-buffer
+" define :Tidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+
+" run :Tidy on entire buffer and return cursor to (approximate) original position
+fun DoTidy()
+	let l = line(".")
+	let c = col(".")
+	:Tidy
+	call cursor(l, c)
+endfun
+
+"shortcut for normal mode to run on entire buffer then return to current line
+au Filetype perl nmap <C-F> :call DoTidy()<CR>
+
+"shortcut for visual mode to run on the the current visual selection"
+au Filetype perl vmap <C-F> :Tidy<CR>
 
