@@ -31,6 +31,8 @@ Plugin 'SyntaxAttr.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'rking/ag.vim'
 Plugin 'godlygeek/tabular'
+" Plugin 'Yggdroot/indentLine'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
@@ -40,6 +42,9 @@ Plugin 'othree/html5.vim'
 
 " twig
 Plugin 'evidens/vim-twig'
+
+" Docker
+Plugin 'ekalinin/dockerfile.vim'
 
 " perl
 Plugin 'vim-perl/vim-perl'
@@ -57,6 +62,12 @@ Plugin 'altercation/vim-colors-solarized'
 
 " puppet
 Plugin 'rodjek/vim-puppet'
+
+" JSON
+Plugin 'elzr/vim-json'
+
+" git
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 
@@ -98,7 +109,7 @@ filetype plugin indent on
 " color
 syntax on
 let g:solarized_termcolors=256
-set t_Co=256 
+set t_Co=256
 set background=light
 " set background=dark
 colorscheme solarized
