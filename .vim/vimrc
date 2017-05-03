@@ -204,13 +204,14 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-nnoremap <F4> :tabe ~/.vimrc<CR>:tabm 0<CR>
+nnoremap <F4>:tabe ~/.vimrc<CR>:tabm 0<CR>
 nnoremap <C-m> :TagbarToggle<CR>
 nnoremap <C-p> :NERDTreeToggle<CR>
 nmap fs <Plug>(easymotion-s)
 nmap fl <Plug>(easymotion-sl)
 map <C-?> <plug>NERDCommenterComment
 map <C-_> <plug>NERDCommenterToggle
+map <Tab> <C-W>w
 
 " https://stackoverflow.com/questions/2345519/how-can-i-script-vim-to-run-perltidy-on-a-buffer
 " define :Tidy command to run perltidy on visual selection || entire buffer"
