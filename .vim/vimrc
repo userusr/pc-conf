@@ -109,7 +109,7 @@ filetype plugin indent on
 " color
 syntax on
 let g:solarized_termcolors=256
-set t_Co=256 
+set t_Co=256
 " set background=light
 set background=dark
 colorscheme solarized
@@ -212,6 +212,7 @@ nmap fl <Plug>(easymotion-sl)
 map <C-?> <plug>NERDCommenterComment
 map <C-_> <plug>NERDCommenterToggle
 map <Tab> <C-W>w
+map <S-Tab> <C-W>W
 
 " https://stackoverflow.com/questions/2345519/how-can-i-script-vim-to-run-perltidy-on-a-buffer
 " define :Tidy command to run perltidy on visual selection || entire buffer"
