@@ -134,11 +134,34 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 
 " easymotion
+" https://github.com/easymotion/vim-easymotion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
 hi link EasyMotionTarget Search
 hi EasyMotionTarget2First ctermfg=202 ctermbg=None cterm=None
 hi EasyMotionTarget2Second ctermfg=202 ctermbg=None cterm=None
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" syntastic
+" https://github.com/vim-syntastic/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_yaml_checkers = ['yamlxs']
 
 " session
 let g:session_autoload = 'yes'
@@ -207,8 +230,6 @@ let g:NERDTrimTrailingWhitespace = 1
 nnoremap <F4>:tabe ~/.vimrc<CR>:tabm 0<CR>
 nnoremap <C-m> :TagbarToggle<CR>
 nnoremap <C-p> :NERDTreeToggle<CR>
-nmap fs <Plug>(easymotion-s)
-nmap fl <Plug>(easymotion-sl)
 map <C-?> <plug>NERDCommenterComment
 map <C-_> <plug>NERDCommenterToggle
 map <Tab> <C-W>w
@@ -231,4 +252,6 @@ au Filetype perl nmap <C-F> :call DoTidy()<CR>
 
 "shortcut for visual mode to run on the the current visual selection"
 au Filetype perl vmap <C-F> :Tidy<CR>
+
+au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
 
