@@ -81,6 +81,7 @@ call vundle#end()
 
 " settings
 set tabstop=4
+set expandtab
 set softtabstop=4
 set shiftwidth=4
 set autoread
@@ -113,6 +114,11 @@ filetype off
 filetype plugin on
 filetype plugin indent on
 " autocmd CompleteDone * pclose
+
+" "вечная" отмена изменений
+" http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
+set undofile
+set undodir=~/.vim/undo/
 
 " color
 syntax on
@@ -271,6 +277,10 @@ map <S-Tab> <C-W>W
 
 nmap <F2> :wa<CR>
 nmap <S-F2> :e!<CR>
+
+" Режим "вклейки"
+" http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
+set pastetoggle=<F7>
 
 " https://stackoverflow.com/questions/2345519/how-can-i-script-vim-to-run-perltidy-on-a-buffer
 " define :Tidy command to run perltidy on visual selection || entire buffer"
