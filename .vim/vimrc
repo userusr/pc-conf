@@ -296,10 +296,10 @@ fun DoTidy()
 endfun
 
 " shortcut for normal mode to run on entire buffer then return to current line
-au Filetype perl nmap <C-F> :call DoTidy()<CR>
+au Filetype perl nmap <leader>pt :call DoTidy()<CR>
 
 " shortcut for visual mode to run on the the current visual selection
-au Filetype perl vmap <C-F> :Tidy<CR>
+au Filetype perl vmap <leader>pt :Tidy<CR>
 
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
