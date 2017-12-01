@@ -52,12 +52,8 @@ RUN cpanm --notest \
     && rm -fr /root/.cpanm/work
 
 RUN mkdir -p $HOME/Site $HOME/.vim \
-    && git clone --depth 1 https://github.com/userusr/pc-conf.git $HOME/Site/pc-conf \
-    && ln -s $HOME/Site/pc-conf/.tmux.conf $HOME/.tmux.conf \
-    && ln -s $HOME/Site/pc-conf/.dir_colors $HOME/.dir_colors \
-    && ln -s $HOME/Site/pc-conf/.dir_colors $HOME/.dircolors \
-    && ln -s $HOME/Site/pc-conf/.vim/vimrc $HOME/.vim/vimrc \
-    && ln -s $HOME/Site/pc-conf/.bash_aliases $HOME/.bash_aliases
+    && git clone --depth 1 https://github.com/userusr/dotfiles.git $HOME/Site/dotfiles \
+    && perl $HOME/Site/dotfiles/script/dotfiles.pl -a -u $HOME
 
 #
 # Selected color scheme must be installed to avoid vim to stusk with message
