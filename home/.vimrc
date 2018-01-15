@@ -1,6 +1,7 @@
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/.vim/bundle/Vundle.vim
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -13,7 +14,6 @@ Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -29,10 +29,16 @@ Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 Plugin 'SyntaxAttr.vim'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'rking/ag.vim'
 Plugin 'godlygeek/tabular'
 " Plugin 'Yggdroot/indentLine'
 Plugin 'ntpeters/vim-better-whitespace'
+
+" Plugin 'ctrlpvim/ctrlp.vim'
+" [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
+Plugin 'junegunn/fzf.vim'
+" [ggreer/the_silver_searcher: A code-searching tool similar to ack, but faster.](https://github.com/ggreer/the_silver_searcher)
+" [rking/ag.vim: Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'](https://github.com/rking/ag.vim)
+Plugin 'rking/ag.vim'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
@@ -74,8 +80,12 @@ Plugin 'elzr/vim-json'
 Plugin 'airblade/vim-gitgutter'
 
 " python
+" [minimumbuilds/minimum_python_ide](https://github.com/minimumbuilds/minimum_python_ide)
 Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi-vim'
+
+" markdown
+Plugin 'shime/vim-livedown'
 
 call vundle#end()
 
@@ -132,6 +142,7 @@ colorscheme solarized
 abbr help tab help
 
 " airline
+" [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -213,6 +224,12 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 
+" FZF
+" [Vim спустя 15 лет / Блог компании Mail.Ru Group / Хабрахабр](https://habrahabr.ru/company/mailru/blog/340740/)
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
+
 " ctrlp
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'wr'
@@ -241,6 +258,18 @@ let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+" https://github.com/shime/vim-livedown
+" Need to install NodeJS from from https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+"
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+" should the browser window pop-up upon previewing
+let g:livedown_open = 1
+" the port on which Livedown server will run
+let g:livedown_port = 1337
+" the browser to use
+let g:livedown_browser = "firefox"
 
 " https://habrahabr.ru/post/224979/
 " отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
