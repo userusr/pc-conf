@@ -44,7 +44,6 @@ RUN cpanm --notest \
           DBD::SQLite \
           DBD::ODBC \
           Spreadsheet::WriteExcel \
-          Spreadsheet::ReadExcel \
           Test::Perl::Critic \
           Test::Pod \
           Test::Pod::Coverage \
@@ -53,7 +52,7 @@ RUN cpanm --notest \
 
 RUN mkdir -p $HOME/Site $HOME/.vim \
     && git clone --depth 1 https://github.com/userusr/dotfiles.git $HOME/Site/dotfiles \
-    && perl $HOME/Site/dotfiles/script/dotfiles.pl -a -u $HOME
+    && perl $HOME/Site/dotfiles/script/dotfiles.pl -a
 
 #
 # Selected color scheme must be installed to avoid vim to stusk with message
@@ -62,7 +61,7 @@ RUN mkdir -p $HOME/Site $HOME/.vim \
 RUN mkdir -p $HOME/.vim/bundle \
     && cd $HOME/.vim/bundle \
     && git clone --depth 1 https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim \
-    && git clone --depth 1 https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/bundle/vim-colors-solarized
+    && git clone --depth 1 https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/bundle/vim-colors-solarized \
     && vim +PluginInstall +qall
 
 #
