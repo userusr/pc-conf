@@ -39,6 +39,9 @@ Plugin 'junegunn/fzf.vim'
 " [ggreer/the_silver_searcher: A code-searching tool similar to ack, but faster.](https://github.com/ggreer/the_silver_searcher)
 " [rking/ag.vim: Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'](https://github.com/rking/ag.vim)
 Plugin 'rking/ag.vim'
+" help unimpaired
+Plugin 'tpope/vim-unimpaired.git'
+Plugin 'tpope/vim-repeat'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
