@@ -12,6 +12,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'valloric/youcompleteme'
 Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
+" tab help fugitive
 Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
