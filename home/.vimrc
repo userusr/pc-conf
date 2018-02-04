@@ -24,7 +24,7 @@ Plugin 'raimondi/delimitmate'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
-" Plugin 'sirver/ultisnips'
+Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
@@ -175,8 +175,8 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
@@ -201,10 +201,11 @@ let g:session_autosave_silent = 1
 let g:session_default_to_last = 1
 
 " tagbar
+nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
-let g:tagbar_width = 35
+let g:tagbar_width = 40
 let g:tagbar_iconchars = ['+', '-']
-let g:tagbar_map_close = '<C-m>'
+" let g:tagbar_map_close = '<C-m>'
 let g:tagbar_type_javascript = {
 \'ctagstype':'JavaScript',
 	\'kinds' : [
@@ -255,6 +256,7 @@ let g:easytags_async = 1
 let g:move_key_modifier = 'C'
 
 " nerdtree
+nnoremap <C-p> :NERDTreeToggle<CR>
 let NERDTreeAutoDeleteBuffer = 1
 
 " NERDCommenter
@@ -304,11 +306,18 @@ let g:pymode_folding = 0
 " возможность запускать код
 let g:pymode_run = 0
 
-nnoremap <C-m> :TagbarToggle<CR>
-nnoremap <C-p> :NERDTreeToggle<CR>
+" youcompleteme
+" [vim - UltiSnips and YouCompleteMe - Stack Overflow](https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme))
+" let g:ycm_key_list_select_completion = ['<C-j>']
+" let g:ycm_key_list_previous_completion = ['<C-k>']
+
+" ultisnips
+let g:UltiSnipsExpandTrigger = "<C-l>"
+let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+
 map <Tab> <C-W>w
 map <S-Tab> <C-W>W
-
 nmap <F2> :wa<CR>
 nmap <S-F2> :e!<CR>
 
