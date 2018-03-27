@@ -6,14 +6,14 @@ ax_backup() {
         return
     fi
 
-    if [ ! -d $1 ]; then
+    if [ ! -d "$1" ]; then
         echo "Parameter mast be a directory"
         return
     fi
 
-    local name=$(basename $1)
-    local arc_name=$(pwd)/${name}_$(date +%Y%m%d%H%M%S).backup.tar.xz
+    local name=$(basename "$1")
+    local arc_name="$(pwd)/${name}_$(date +%Y%m%d%H%M%S).backup.tar.xz"
 
     cd "$(dirname "$1")"
-    tar -Jcvf ${arc_name} ${name}/
+    tar -Jcvf "${arc_name}" "${name}"/
 }
