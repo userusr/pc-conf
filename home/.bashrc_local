@@ -1,0 +1,24 @@
+# Add in ~/.bashrc
+#
+#     if [ -f ~/.bashrc_local ]; then
+#         . ~/.bashrc_local
+#     fi
+
+export PATH="/home/${USER}/perl5/bin${PATH:+:${PATH}}"
+export PERL5LIB="/home/${USER}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL_LOCAL_LIB_ROOT="/home/${USER}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_MB_OPT="--install_base \"/home/${USER}/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=/home/${USER}/perl5"
+
+export PATH="/home/${USER}/anaconda3/bin:$PATH"
+
+[ -f /home/${USER}/Programms/texlive2017/bin/x86_64-linux ] && export PATH=/home/${USER}/Programms/texlive2017/bin/x86_64-linux:${PATH}
+[ -f /home/${USER}/Programms/texlive2017/texmf-dist/doc/man ] && export MANPATH=/home/${USER}/Programms/texlive2017/texmf-dist/doc/man:${MANPATH}
+[ -f /home/${USER}/Programms/texlive2017/texmf-dist/doc/info ] && export INFOPATH=/home/${USER}/Programms/texlive2017/texmf-dist/doc/info:${INFOPATH}
+
+export GIT_PROMPT_THEME=Single_line_Dark
+export GIT_PROMPT_ONLY_IN_REPO=1
+[ -f /home/${USER}/.bash-git-prompt/gitprompt.sh ] && source /home/${USER}/.bash-git-prompt/gitprompt.sh
+
+[ -f /home/${USER}/.fzf.bash ] && source /home/${USER}/.fzf.bash
+

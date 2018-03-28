@@ -1,5 +1,10 @@
 # Dotfiles
 
+## Полезное 
+
+* [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
+* [magicmonty/bash-git-prompt: An informative and fancy bash prompt for Git users](https://github.com/magicmonty/bash-git-prompt)
+
 ## MC
 
 | Команда               | Описание                                                                 |
