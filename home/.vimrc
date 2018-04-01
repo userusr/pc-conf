@@ -69,6 +69,8 @@ Plugin 'damage220/solas.vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mhartington/oceanic-next'
 Plugin 'altercation/vim-colors-solarized'
+" [jnurmine/Zenburn: Zenburn is a low-contrast color scheme for Vim.](https://github.com/jnurmine/Zenburn))
+Plugin 'jnurmine/Zenburn'
 
 " puppet
 Plugin 'rodjek/vim-puppet'
@@ -87,6 +89,10 @@ Plugin 'airblade/vim-gitgutter'
 " [minimumbuilds/minimum_python_ide](https://github.com/minimumbuilds/minimum_python_ide)
 Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'tell-k/vim-autopep8'
+" help pydocstring.txt
+" <C-l> insert docstring
+Plugin 'heavenshell/vim-pydocstring'
 
 " markdown
 Plugin 'shime/vim-livedown'
@@ -122,6 +128,7 @@ set hlsearch
 set incsearch
 set cursorline
 set pumheight=10
+set clipboard=unnamed
 set fillchars+=vert:\ 
 let mapleader=","
 filetype off
@@ -162,6 +169,9 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 
+" autopep8
+" let g:autopep8_disable_show_diff = 1
+
 " easymotion
 " https://github.com/easymotion/vim-easymotion
 let g:EasyMotion_smartcase = 1
@@ -192,6 +202,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamlxs']
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+" [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {'regex': 'possibly useless use of a variable in void context'}
 
 " session
 let g:session_autoload = 'yes'
@@ -310,6 +323,8 @@ let g:pymode_run = 0
 " [vim - UltiSnips and YouCompleteMe - Stack Overflow](https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme))
 " let g:ycm_key_list_select_completion = ['<C-j>']
 " let g:ycm_key_list_previous_completion = ['<C-k>']
+" для файлов python используем jedi-vim
+let g:ycm_filetype_blacklist = { 'python': 1  }
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<C-l>"
@@ -342,6 +357,18 @@ au Filetype perl nmap <leader>pt :call DoTidy()<CR>
 
 " shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <leader>pt :Tidy<CR>
+
+au FileType python noremap <buffer> <leader>pt :call Autopep8()<CR>
+au FileType python noremap <leader>pd <Plug>(pydocstring)
+
+au BufNewFile,BufRead *.py
+            \set tabstop=4
+            \set softtabstop=4
+            \set shiftwidth=4
+            \set textwidth=79
+            \set expandtab
+            \set autoindent
+            \set fileformat=unix
 
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
