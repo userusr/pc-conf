@@ -1,156 +1,362 @@
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/.vim/bundle/Vundle.vim
-" set the runtime path to include Vundle and initialize
+" Vungle.vim
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"
+" Reload .vimrc file
+" % - alias for current file name
+"    :source %
+"    :source $MYVMRC
+"
+set nocompatible
+filetype off
+
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
-call vundle#begin()
 
+call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" common
+" The NERDTree is a file system explorer for the Vim editor. Using this plugin,
+" users can visually browse complex directory hierarchies, quickly open files
+" for reading or editing, and perform basic file system operations.
 Plugin 'scrooloose/nerdtree'
-Plugin 'valloric/youcompleteme'
-Plugin 'xolox/vim-easytags'
+" Comment functions so powerful—no comment necessary.
+Plugin 'scrooloose/nerdcommenter'
+" Tagbar is a Vim plugin that provides an easy way to browse the tags of the current
+" file and get an overview of its structure. It does this by creating a sidebar that
+" displays the ctags-generated tags of the current file, ordered by their scope.
+" This means that for example methods in C++ are displayed under the class they are
+" defined in.
 Plugin 'majutsushi/tagbar'
-" tab help fugitive
+" Vim vim has long been my favorite text editor and combined with [Exuberant Ctags]
+" exctags it has the potential to provide most of what I expect from an [integrated
+" development environment] ide. Exuberant Ctags is the latest incarnation of a
+" [family of computer programs] ctags that scan source code files to create an index
+" of identifiers (tags) and where they are defined. Vim uses this index (a so-called
+" tags file) to enable you to jump to the definition of any identifier using
+" the [Control-]] ctrl_mapping mapping.
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+" jedi-vim is a VIM binding to the autocompletion library Jedi.
+" Completion       <C-Space>
+" Goto assignments <leader>g
+" Goto definitions <leader>d
+" Show Docm        K (shows a popup with assignments)
+" Renaming         <leader>r
+" Usages           <leader>n (shows all the usages of a name)
+" Open module     :Pyimport os (opens the os module)
+Plugin 'davidhalter/jedi-vim'
+" Run your favorite search tool from Vim, with an enhanced results list.
+"
+" The quickfix results window is augmented with these convenience mappings:
+" ?    a quick summary of these keys, repeat to close
+" o    to open (same as Enter)
+" O    to open and close the quickfix window
+" go   to preview file, open but maintain focus on ack.vim results
+" t    to open in new tab
+" T    to open in new tab without moving to it
+" h    to open in horizontal split
+" H    to open in horizontal split, keeping focus on the results
+" v    to open in vertical split
+" gv   to open in vertical split, keeping focus on the results
+" q    to close the quickfix window
+Plugin 'mileszs/ack.vim'
+" [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
+" help fzf-vim
+Plugin 'junegunn/fzf.vim'
+" I'm not going to lie to you; fugitive.vim may very well be the best Git
+" wrapper of all time. :)
 Plugin 'tpope/vim-fugitive'
+" A Vim plugin which shows a git diff in the 'gutter' (sign column). It shows
+" which lines have been added, modified, or removed. You can also preview,
+" stage, and undo individual hunks. The plugin also provides a hunk text
+" object.
+"
+"   jump to next hunk (change): ]c
+"   jump to previous hunk (change): [c.
+"
+"   ic operates on all lines in the current hunk.
+"   ac operates on all lines in the current hunk and any trailing empty lines.
+"
+Plugin 'airblade/vim-gitgutter'
+" EasyMotion provides a much simpler way to use some motions in vim.
 Plugin 'easymotion/vim-easymotion'
-Plugin 'terryma/vim-multiple-cursors'
+" Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML
+" tags, and more. The plugin provides mappings to easily delete, change and add
+" such surroundings in pairs.
+Plugin 'tpope/vim-surround'
+" Syntastic is a syntax checking plugin for Vim created by Martin Grenfell. It
+" runs files through external syntax checkers and displays any resulting errors
+" to the user. This can be done on demand, or automatically as files are saved.
+" If syntax errors are detected, the user is notified and is happy because they
+" didn't have to compile their code or execute their script to find them.
+Plugin 'scrooloose/syntastic'
+" There are mappings which are simply short normal mode aliases for commonly
+" used ex commands. ]q is :cnext. [q is :cprevious. ]a is :next. [b is
+" :bprevious. See the documentation for the full set of 20 mappings and
+" mnemonics. All of them take a count.
+"
+" There are linewise mappings. [<Space> and ]<Space> add newlines before and
+" after the cursor line. [e and ]e exchange the current line with the one above
+" or below it.
+"
+" There are mappings for toggling options. [os, ]os, and =os perform :set spell,
+" :set nospell, and :set invspell, respectively. There's also l (list), n
+" (number), w (wrap), x (cursorline cursorcolumn), and several others, plus
+" mappings to help alleviate the set paste dance. Consult the documentation.
+"
+" There are mappings for encoding and decoding. [x and ]x encode and decode XML
+" (and HTML). [u and ]u encode and decode URLs. [y and ]y do C String style
+" escaping.
+"
+" And in the miscellaneous category, there's [f and ]f to go to the
+" next/previous file in the directory, and [n and ]n to jump between SCM
+" conflict markers.
+Plugin 'tpope/vim-unimpaired.git'
+" If you've ever tried using the . command after a plugin map, you were likely
+" disappointed to discover it only repeated the last native command inside that
+" map, rather than the map as a whole. That disappointment ends today.
+" Repeat.vim remaps . in a way that plugins can tap into it.
+Plugin 'tpope/vim-repeat'
+" This plugin causes all trailing whitespace characters (see Supported
+" Whitespace Characters below) to be highlighted. Whitespace for the current
+" line will not be highlighted while in insert mode. It is possible to disable
+" current line highlighting while in other modes as well (see options below). A
+" helper function :StripWhitespace is also provided to make whitespace cleaning
+" painless.
+Plugin 'ntpeters/vim-better-whitespace'
+" Insert or delete brackets, parens, quotes in pair.
+Plugin 'jiangmiao/auto-pairs.git'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'matze/vim-move'
-Plugin 'raimondi/delimitmate'
-Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
-Plugin 'SyntaxAttr.vim'
-Plugin 'dyng/ctrlsf.vim'
+" Sometimes, it's useful to line up text. Naturally, it's nicer to have the
+" computer do this for you, since aligning things by hand quickly becomes
+" unpleasant. While there are other plugins for aligning text, the ones I've
+" tried are either impossibly difficult to understand and use, or too
+" simplistic to handle complicated tasks. This plugin aims to make the easy
+" things easy and the hard things possible, without providing an unnecessarily
+" obtuse interface. It's still a work in progress, and criticisms are welcome.
+" See Aligning Text with Tabular.vim for a screencast that shows how
+" Tabular.vim works.
+" See doc/Tabular.txt for detailed documentation.
 Plugin 'godlygeek/tabular'
-" Plugin 'Yggdroot/indentLine'
-Plugin 'ntpeters/vim-better-whitespace'
-
-" Plugin 'ctrlpvim/ctrlp.vim'
-" [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
-Plugin 'junegunn/fzf.vim'
-" [ggreer/the_silver_searcher: A code-searching tool similar to ack, but faster.](https://github.com/ggreer/the_silver_searcher)
-" [rking/ag.vim: Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'](https://github.com/rking/ag.vim)
-Plugin 'rking/ag.vim'
-" help unimpaired
-Plugin 'tpope/vim-unimpaired.git'
-Plugin 'tpope/vim-repeat'
-
+" puppet
+Plugin 'rodjek/vim-puppet'
+" YAML
+" https://stackoverflow.com/questions/19030290/syntax-highlighting-causes-terrible-lag-in-vim
+Plugin 'stephpy/vim-yaml'
 " javascript
 Plugin 'pangloss/vim-javascript'
-
 " html
 Plugin 'othree/html5.vim'
-
-" twig
-Plugin 'evidens/vim-twig'
-
 " Docker
 Plugin 'ekalinin/dockerfile.vim'
-
 " perl
 Plugin 'vim-perl/vim-perl'
 Plugin 'yko/mojo.vim'
 Plugin 'perl-support.vim'
-
 " css
 Plugin 'mtscout6/vim-tagbar-css'
-
+" python
+" $ sudo pip3 install autopep8
+Plugin 'tell-k/vim-autopep8'
 " colors
 Plugin 'damage220/solas.vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mhartington/oceanic-next'
 Plugin 'altercation/vim-colors-solarized'
-" [jnurmine/Zenburn: Zenburn is a low-contrast color scheme for Vim.](https://github.com/jnurmine/Zenburn))
 Plugin 'jnurmine/Zenburn'
-
-" puppet
-Plugin 'rodjek/vim-puppet'
-
-" YAML
-" https://stackoverflow.com/questions/19030290/syntax-highlighting-causes-terrible-lag-in-vim
-Plugin 'stephpy/vim-yaml'
-
-" JSON
-Plugin 'elzr/vim-json'
-
-" git
-Plugin 'airblade/vim-gitgutter'
-
-" python
-" [minimumbuilds/minimum_python_ide](https://github.com/minimumbuilds/minimum_python_ide)
-Plugin 'klen/python-mode'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'tell-k/vim-autopep8'
-" help pydocstring.txt
-" <C-l> insert docstring
-Plugin 'heavenshell/vim-pydocstring'
-
-" markdown
-Plugin 'shime/vim-livedown'
-
 call vundle#end()
-
-" settings
-set tabstop=4
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set autoread
-set autoindent
-set smartindent
-set rnu
-set laststatus=2
-set timeoutlen=500
-set ttimeoutlen=0
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-set encoding=utf-8
-set termencoding=utf-8
-set updatetime=500
-set noswapfile
-set splitright
-set splitbelow
-set nocompatible
-set tags=~/.vim/tags;
-set ignorecase
-set hidden
-set hlsearch
-set incsearch
-set cursorline
-set pumheight=10
-set clipboard=unnamed
-set fillchars+=vert:\ 
-let mapleader=","
-filetype off
-filetype plugin on
 filetype plugin indent on
-" autocmd CompleteDone * pclose
 
+" Number of spaces that a <Tab> in the file counts for.
+set tabstop=4
+" Use the appropriate number of spaces to insert a <Tab>.
+set expandtab
+" Number of spaces that a <Tab> counts for while performing editing
+" operations, like inserting a <Tab> or using <BS>.
+set softtabstop=4
+" Number of spaces to use for each step of (auto)indent.
+set shiftwidth=4
+" When a file has been detected to have been changed outside of Vim and
+" it has not been changed inside of Vim, automatically read it again.
+set autoread
+" Copy indent from current line when starting a new line.
+set autoindent
+" Do smart autoindenting when starting a new line.
+set smartindent
+" Show the line number relative to the line with the cursor in front of each line.
+set relativenumber
+" When the keyboard doesn't produce the characters you want to enter in your
+" text, you can use the 'keymap' option.  This will translate one or more
+" (English) characters to another (non-English) character.  This only happens
+" when typing text, not when typing Vim commands.  This avoids having to switch
+" between two keyboard settings.
+set keymap=russian-jcukenwin
+" Specifies whether :lmap or an Input Method (IM) is to be used in
+" Insert mode.  Valid values:
+"     0	:lmap is off and IM is off
+"     1	:lmap is ON and IM is off
+"     2	:lmap is off and IM is ON
+set iminsert=0
+" Specifies whether :lmap or an Input Method (IM) is to be used when
+" entering a search pattern.  Valid values:
+"     -1	the value of 'iminsert' is used, makes it look like
+"           'iminsert' is also used when typing a search pattern
+"     0	:lmap is off and IM is off
+"     1	:lmap is ON and IM is off
+"     2	:lmap is off and IM is ON
+set imsearch=0
+" Sets the character encoding used inside Vim.
+set encoding=utf-8
+" Encoding used for the terminal.
+set termencoding=utf-8
+" If it contains a command that loads a new buffer, it will be loaded without
+" creating a swapfile and the 'swapfile' option will be reset.
+set noswapfile
+" When on, splitting a window will put the new window right of the
+" current one.
+set splitright
+" When on, splitting a window will put the new window below the current one.
+set splitbelow
+" Ignore case in search patterns.  Also used when searching in the tags file.
+set ignorecase
+" When off a buffer is unloaded when it is abandoned.  When on a
+" buffer becomes hidden when it is abandoned.
+set hidden
+" When there is a previous search pattern, highlight all its matches.
+set hlsearch
+" While typing a search command, show where the pattern, as it was typed
+" so far, matches.  The matched string is highlighted.
+set incsearch
+" Highlight the screen line of the cursor with CursorLine
+" hl-CursorLine.  Useful to easily spot the cursor.  Will make screen
+" redrawing slower.
+set cursorline
+" Determines the maximum number of items to show in the popup menu for
+" Insert mode completion.  When zero as much space as available is used.
+set pumheight=10
+" Characters to fill the statuslines and vertical separators.
+set fillchars+=vert:\ 
+" Strings to use in 'list' mode and for the |:list| command.  It is a
+" comma separated list of string settings.
+set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+" When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+set wildmenu
+" When this option is set, the screen will not be redrawn while
+" executing macros, registers and other commands that have not been
+" typed.  Also, updating the window title is postponed.
+set lazyredraw
+" When off, all folds are open.  This option can be used to quickly
+" switch between showing all text unfolded and viewing the text with
+" folds (including manually opened or closed folds).  It can be toggled
+" with the |zi| command.  The 'foldcolumn' will remain blank when
+" 'foldenable' is off.
+set foldenable
+" The kind of folding used for the current window.  Possible values:
+" |fold-manual|	manual	    Folds are created manually.
+" |fold-indent|	indent	    Lines with equal indent form a fold.
+" |fold-expr|	expr	    'foldexpr' gives the fold level of a line.
+" |fold-marker|	marker	    Markers are used to specify folds.
+" |fold-syntax|	syntax	    Syntax highlighting items specify folds.
+" |fold-diff|	diff	    Fold text that is not changed.
+set foldmethod=indent
+" Sets 'foldlevel' when starting to edit another buffer in a window.
+" Useful to always start editing with all folds closed (value zero),
+" some folds closed (one) or no folds closed (99).
+set foldlevelstart=2
 " "вечная" отмена изменений
 " http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
 set undofile
 set undodir=~/.vim/undo/
-
-" color
+" <leader>
+let mapleader=","
+" colors
 syntax on
 let g:solarized_termcolors=256
 set t_Co=256
 " set background=light
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme zenburn
 
-" abbreviations
-abbr help tab help
+" set laststatus=2
+
+" Режим "вклейки"
+" http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
+set pastetoggle=<F7>
+
+map <leader>w :wa<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdtree
+" let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
+let NERDTreeShowBookmarks=1
+map 1 :NERDTreeToggle<CR>
+
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+" https://stackoverflow.com/questions/9051837/how-to-map-c-to-toggle-comments-in-vim
+map <C-_> <plug>NERDCommenterToggle
+
+" tagbar
+let g:tagbar_sort = 0
+let g:tagbar_width = 40
+let g:tagbar_iconchars = ['+', '-']
+map 7 :TagbarToggle<CR>
+
+" vim-easytags
+set tags=tags;$HOME/.vim/tags/
+let g:easytags_events = ['BufWritePost']
+let g:easytags_async = 1
+
+" ack.vim
+if executable('ag')
+   let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+
+" fzf.vim
+" https://habrahabr.ru/company/mailru/blog/340740/
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>/ :BLines<CR>
+
+" vim-easymotion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_shade = 0
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_yaml_checkers = ['yamlxs']
+"   sudo apt install python3-pep8 pylint3 python3-flake8
+"   sudo pip3 install pylama python-gflags
+"
+"   :SyntasticInfo python
+let g:syntastic_python_checkers = ['pylama']
+" [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {'regex': 'possibly useless use of a variable in void context'}
+" Syntastic can be used along with the "python-mode" Vim plugin (see
+" https://github.com/klen/python-mode). However, they both run syntax checks by
+" default when you save buffers to disk, and this is probably not what you want.
+" To avoid both plugins opening error windows, you can either set passive mode
+" for python in syntastic (see |'syntastic_mode_map'|), or disable lint checks in
+" "python-mode", by setting |pymode_lint_on_write| to 0. E.g.: >
+"     let g:pymode_lint_on_write = 0
+" let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
@@ -169,181 +375,8 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 
-" autopep8
-" let g:autopep8_disable_show_diff = 1
-
-" easymotion
-" https://github.com/easymotion/vim-easymotion
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_do_shade = 0
-hi link EasyMotionTarget Search
-hi EasyMotionTarget2First ctermfg=202 ctermbg=None cterm=None
-hi EasyMotionTarget2Second ctermfg=202 ctermbg=None cterm=None
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" syntastic
-" https://github.com/vim-syntastic/syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_yaml_checkers = ['yamlxs']
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
-" [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {'regex': 'possibly useless use of a variable in void context'}
-
-" session
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
-let g:session_autosave_periodic = 5
-let g:session_autosave_silent = 1
-let g:session_default_to_last = 1
-
-" tagbar
-nnoremap <F8> :TagbarToggle<CR>
-let g:tagbar_sort = 0
-let g:tagbar_width = 40
-let g:tagbar_iconchars = ['+', '-']
-" let g:tagbar_map_close = '<C-m>'
-let g:tagbar_type_javascript = {
-\'ctagstype':'JavaScript',
-	\'kinds' : [
-		\'f:functions',
-		\'c:classes',
-		\'m:methods',
-		\'p:properties'
-	\]
-\}
-
-" map <alt+n> to navigate through tabs
-for c in range(1, 9)
-	exec "set <A-".c.">=\e".c
-	exec "map \e".c." <A-".c.">"
-	let n = c - '0'
-	exec "map <M-". n ."> ". n ."gt"
-endfor
-
-" delimitmate
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
-
-" FZF
-" [Vim спустя 15 лет / Блог компании Mail.Ru Group / Хабрахабр](https://habrahabr.ru/company/mailru/blog/340740/)
-nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
-
-" ctrlp
-let g:ctrlp_by_filename = 1
-let g:ctrlp_working_path_mode = 'wr'
-let g:ctrlp_map = ''
-let g:ctrlp_buftag_types = {
-	\'php': '--php-kinds=icdf'
-\}
-
-" ctrlsf
-let g:ctrlsf_position = 'right'
-
-" easytags
-let g:easytags_file = '~/.vim/tags'
-let g:easytags_auto_highlight = 0
-let g:easytags_events = ['BufWritePost']
-let g:easytags_async = 1
-
-" move
-let g:move_key_modifier = 'C'
-
-" nerdtree
-nnoremap <C-p> :NERDTreeToggle<CR>
-let NERDTreeAutoDeleteBuffer = 1
-
-" NERDCommenter
-let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-
-" https://github.com/shime/vim-livedown
-" Need to install NodeJS from from https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-"
-" should markdown preview get shown automatically upon opening markdown buffer
-let g:livedown_autorun = 0
-" should the browser window pop-up upon previewing
-let g:livedown_open = 1
-" the port on which Livedown server will run
-let g:livedown_port = 1337
-" the browser to use
-let g:livedown_browser = "firefox"
-
-" https://habrahabr.ru/post/224979/
-" отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
-" документация
-let g:pymode_doc = 0
-let g:pymode_doc_key = 'K'
-" проверка кода
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-let g:pymode_lint_ignore="E501,W601,C0110"
-" провека кода после сохранения
-let g:pymode_lint_write = 1
-" поддержка virtualenv
-let g:pymode_virtualenv = 1
-" установка breakpoints
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
-" подстветка синтаксиса
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-" отключить autofold по коду
-let g:pymode_folding = 0
-" возможность запускать код
-let g:pymode_run = 0
-
-" youcompleteme
-" [vim - UltiSnips and YouCompleteMe - Stack Overflow](https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme))
-" let g:ycm_key_list_select_completion = ['<C-j>']
-" let g:ycm_key_list_previous_completion = ['<C-k>']
-" для файлов python используем jedi-vim
-let g:ycm_filetype_blacklist = { 'python': 1  }
-
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<C-l>"
-let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-
-map <Tab> <C-W>w
-map <S-Tab> <C-W>W
-nmap <F2> :wa<CR>
-nmap <S-F2> :e!<CR>
-
-" Режим "вклейки"
-" http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
-set pastetoggle=<F7>
-
-" https://stackoverflow.com/questions/2345519/how-can-i-script-vim-to-run-perltidy-on-a-buffer
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
-
 " run :Tidy on entire buffer and return cursor to (approximate) original position
 fun DoTidy()
 	let l = line(".")
@@ -351,25 +384,16 @@ fun DoTidy()
 	:Tidy
 	call cursor(l, c)
 endfun
-
 " shortcut for normal mode to run on entire buffer then return to current line
 au Filetype perl nmap <leader>pt :call DoTidy()<CR>
-
 " shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <leader>pt :Tidy<CR>
-
-au FileType python noremap <buffer> <leader>pt :call Autopep8()<CR>
-au FileType python noremap <leader>pd <Plug>(pydocstring)
-
-au BufNewFile,BufRead *.py
-            \set tabstop=4
-            \set softtabstop=4
-            \set shiftwidth=4
-            \set textwidth=79
-            \set expandtab
-            \set autoindent
-            \set fileformat=unix
-
+" autopep8
+au FileType python noremap <buffer> <leader>p8 :call Autopep8()<CR>
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" http://vim.wikia.com/wiki/Using_command-line_history
+" q:     Show command history
+" q/     Show search history
