@@ -307,6 +307,7 @@ map <C-_> <plug>NERDCommenterToggle
 " tagbar
 let g:tagbar_sort = 0
 let g:tagbar_width = 40
+let g:tagbar_autofocus = 1
 let g:tagbar_iconchars = ['+', '-']
 map 7 :TagbarToggle<CR>
 
@@ -346,6 +347,7 @@ let g:syntastic_yaml_checkers = ['yamlxs']
 "
 "   :SyntasticInfo python
 let g:syntastic_python_checkers = ['pylama']
+let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {'regex': 'possibly useless use of a variable in void context'}
