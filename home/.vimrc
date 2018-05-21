@@ -6,6 +6,9 @@
 "    :source %
 "    :source $MYVMRC
 "
+" Docs
+" https://code.djangoproject.com/wiki/UsingVimWithDjango
+"
 set nocompatible
 filetype off
 
@@ -36,6 +39,10 @@ Plugin 'majutsushi/tagbar'
 " the [Control-]] ctrl_mapping mapping.
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
+" sudo apt-get install build-essential cmake python-dev python3-dev
+" cd ~/.vim/bundle/YouCompleteMe
+" ./install.py --clang-completer
+Plugin 'valloric/youcompleteme'
 " jedi-vim is a VIM binding to the autocompletion library Jedi.
 " Completion       <C-Space>
 " Goto assignments <leader>g
@@ -44,7 +51,11 @@ Plugin 'xolox/vim-misc'
 " Renaming         <leader>r
 " Usages           <leader>n (shows all the usages of a name)
 " Open module     :Pyimport os (opens the os module)
+" 
+" sudo apt install python3-jedi
 Plugin 'davidhalter/jedi-vim'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 " Run your favorite search tool from Vim, with an enhanced results list.
 "
 " The quickfix results window is augmented with these convenience mappings:
@@ -89,6 +100,8 @@ Plugin 'tpope/vim-surround'
 " to the user. This can be done on demand, or automatically as files are saved.
 " If syntax errors are detected, the user is notified and is happy because they
 " didn't have to compile their code or execute their script to find them.
+"   sudo apt install python3-pep8 pylint3 python3-flake8
+"   sudo pip3 install pylama python-gflags
 Plugin 'scrooloose/syntastic'
 " There are mappings which are simply short normal mode aliases for commonly
 " used ex commands. ]q is :cnext. [q is :cprevious. ]a is :next. [b is
@@ -316,6 +329,22 @@ set tags=tags;$HOME/.vim/tags/
 let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
 
+" youcompleteme
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_filetype_blacklist = { 'python' : 1 }
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" ultisnips
+let g:UltiSnipsExpandTrigger       = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger  = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsListSnippets        = "<C-l>" "List possible snippets based on current file
+
 " ack.vim
 if executable('ag')
    let g:ackprg = 'ag --vimgrep --smart-case'
@@ -334,6 +363,7 @@ let g:EasyMotion_do_shade = 0
 nmap s <Plug>(easymotion-overwin-f2)
 
 " syntastic
+" :SyntasticInfo python
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -342,23 +372,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamlxs']
-"   sudo apt install python3-pep8 pylint3 python3-flake8
-"   sudo pip3 install pylama python-gflags
-"
-"   :SyntasticInfo python
 let g:syntastic_python_checkers = ['pylama']
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {'regex': 'possibly useless use of a variable in void context'}
-" Syntastic can be used along with the "python-mode" Vim plugin (see
-" https://github.com/klen/python-mode). However, they both run syntax checks by
-" default when you save buffers to disk, and this is probably not what you want.
-" To avoid both plugins opening error windows, you can either set passive mode
-" for python in syntastic (see |'syntastic_mode_map'|), or disable lint checks in
-" "python-mode", by setting |pymode_lint_on_write| to 0. E.g.: >
-"     let g:pymode_lint_on_write = 0
-" let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
