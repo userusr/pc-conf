@@ -54,6 +54,17 @@ Plugin 'valloric/youcompleteme'
 " 
 " sudo apt install python3-jedi
 Plugin 'davidhalter/jedi-vim'
+" Vim plugin to sort python imports using isort
+" You can configure the default mapping for the visual mode sorter, like this:
+"   let g:vim_isort_map = '<C-i>'
+" Or disable the mapping with this:
+"   let g:vim_isort_map = ''
+" You can also specify a particular Python version, so if isort is installed
+" under Python 3:
+"   let g:vim_isort_python_version = 'python3'
+"
+"    sudo pip3 install isort setuptools
+Plugin 'fisadev/vim-isort'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 " Run your favorite search tool from Vim, with an enhanced results list.
@@ -395,6 +406,8 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 
+" autopep8
+let g:autopep8_disable_show_diff=1
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 " run :Tidy on entire buffer and return cursor to (approximate) original position
@@ -404,12 +417,18 @@ fun DoTidy()
 	:Tidy
 	call cursor(l, c)
 endfun
+" Tidy python files
+fun DoPyTidy()
+    :Isort
+    call Autopep8()
+    :write
+endfun
 " shortcut for normal mode to run on entire buffer then return to current line
 au Filetype perl nmap <leader>pt :call DoTidy()<CR>
 " shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <leader>pt :Tidy<CR>
 " autopep8
-au FileType python noremap <buffer> <leader>p8 :call Autopep8()<CR>
+au FileType python noremap <buffer> <leader>pt :call DoPyTidy()<CR>
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
 
