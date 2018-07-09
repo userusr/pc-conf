@@ -51,7 +51,7 @@ Plugin 'valloric/youcompleteme'
 " Renaming         <leader>r
 " Usages           <leader>n (shows all the usages of a name)
 " Open module     :Pyimport os (opens the os module)
-" 
+"
 " sudo apt install python3-jedi
 Plugin 'davidhalter/jedi-vim'
 " Vim plugin to sort python imports using isort
@@ -150,6 +150,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'ntpeters/vim-better-whitespace'
 " Insert or delete brackets, parens, quotes in pair.
 Plugin 'jiangmiao/auto-pairs.git'
+"
+" sudo apt install fonts-powerline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Sometimes, it's useful to line up text. Naturally, it's nicer to have the
@@ -284,6 +286,9 @@ set foldenable
 " |fold-syntax|	syntax	    Syntax highlighting items specify folds.
 " |fold-diff|	diff	    Fold text that is not changed.
 set foldmethod=indent
+" This option changes how text is displayed.  It doesn't change the text
+" in the buffer, see 'textwidth' for that.
+set nowrap
 " Sets 'foldlevel' when starting to edit another buffer in a window.
 " Useful to always start editing with all folds closed (value zero),
 " some folds closed (one) or no folds closed (99).
@@ -357,15 +362,18 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsListSnippets        = "<C-l>" "List possible snippets based on current file
 
 " ack.vim
+" ERR: Error in pthread_setaffinity_np(): Invalid argument
+" ERR: Performance may be affected. Use --noaffinity to suppress this message.
 if executable('ag')
-   let g:ackprg = 'ag --vimgrep --smart-case'
+   let g:ackprg = 'ag --noaffinity --vimgrep --smart-case'
 endif
 
 " fzf.vim
 " https://habrahabr.ru/company/mailru/blog/340740/
-nmap ; :Buffers<CR>
+nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>/ :BLines<CR>
+nmap <Leader>? :Lines<CR>
 
 " vim-easymotion
 let g:EasyMotion_smartcase = 1
@@ -388,6 +396,7 @@ let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {'regex': 'possibly useless use of a variable in void context'}
+let g:syntastic_pylama_args="--max-line-length=120"
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
@@ -408,6 +417,7 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 " autopep8
 let g:autopep8_disable_show_diff=1
+let g:autopep8_max_line_length=120
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 " run :Tidy on entire buffer and return cursor to (approximate) original position
@@ -431,7 +441,17 @@ au Filetype perl vmap <leader>pt :Tidy<CR>
 au FileType python noremap <buffer> <leader>pt :call DoPyTidy()<CR>
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/bundle/vim-yaml/after/syntax/yaml.vim
+" [VIM and Python – A Match Made in Heaven – RealPython](https://realpython.com/vim-and-python-a-match-made-in-heaven/#python-indentation)
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=119
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
 
+au FileType perl,python nmap <leader>mt :make test<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vim.wikia.com/wiki/Using_command-line_history
 " q:     Show command history
