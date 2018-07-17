@@ -106,6 +106,12 @@ Plugin 'easymotion/vim-easymotion'
 " tags, and more. The plugin provides mappings to easily delete, change and add
 " such surroundings in pairs.
 Plugin 'tpope/vim-surround'
+" ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
+" 0.2.0+ and Vim 8 while you edit your text files.
+"   sudo apt install python3-pep8 pylint3 python3-flake8 yamllint
+"   sudo pip3 install pylama python-gflags mypy pyre-check prospector
+"   sudo pip3 install pycodestyle
+"Plugin 'w0rp/ale'
 " Syntastic is a syntax checking plugin for Vim created by Martin Grenfell. It
 " runs files through external syntax checkers and displays any resulting errors
 " to the user. This can be done on demand, or automatically as files are saved.
@@ -374,12 +380,20 @@ nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>/ :BLines<CR>
 nmap <Leader>? :Lines<CR>
+nmap <Leader>gc :Commits<CR>
+
+" fugitive.vim
+nmap <Leader>gs :Gstatus<CR>
 
 " vim-easymotion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
+
+" ALE
+" let g:ale_python_pylint_executable = 'pylint3'
+" let g:ale_open_list = 1
 
 " syntastic
 " :SyntasticInfo python
@@ -390,7 +404,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_yaml_checkers = ['yamlxs']
+let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_python_checkers = ['pylama']
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
