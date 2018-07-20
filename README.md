@@ -4,6 +4,8 @@
 
 * [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
 * [magicmonty/bash-git-prompt: An informative and fancy bash prompt for Git users](https://github.com/magicmonty/bash-git-prompt)
+* [chubin/cheat.sh: the only cheat sheet you need](https://github.com/chubin/cheat.sh)
+* [tldr-pages/tldr: Simplified and community-driven man pages](https://github.com/tldr-pages/tldr)
 
 ## MC
 

@@ -197,6 +197,20 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'mhartington/oceanic-next'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jnurmine/Zenburn'
+"
+" Plugins to see
+"
+" endwise.vim
+" This is a simple plugin that helps to end certain structures automatically. In Ruby, this means
+" adding end after if, do, def and several other keywords. In Vimscript, this amounts to appropriately
+" adding endfunction, endif, etc. There's also Bourne shell, Z shell, VB (don't ask), C/C++ preprocessor,
+" Lua, Elixir, Haskell, Objective-C, Matlab, Crystal and Jinja templates support.
+" Plugin 'tpope/vim-endwise.git'
+"
+" vim-polyglot
+" A collection of language packs for Vim.
+" Plugin 'sheerun/vim-polyglot'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -224,7 +238,7 @@ set relativenumber
 " when typing text, not when typing Vim commands.  This avoids having to switch
 " between two keyboard settings.
 set keymap=russian-jcukenwin
-" Specifies whether :lmap or an Input Method (IM) is to be used in
+"Specifies whether :lmap or an Input Method (IM) is to be used in
 " Insert mode.  Valid values:
 "     0	:lmap is off and IM is off
 "     1	:lmap is ON and IM is off
