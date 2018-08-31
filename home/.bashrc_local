@@ -20,5 +20,14 @@ export GIT_PROMPT_THEME=Single_line_Dark
 export GIT_PROMPT_ONLY_IN_REPO=1
 [ -f /home/${USER}/.bash-git-prompt/gitprompt.sh ] && source /home/${USER}/.bash-git-prompt/gitprompt.sh
 
+# FZF
 [ -f /home/${USER}/.fzf.bash ] && source /home/${USER}/.fzf.bash
 
+# PYENV
+# [pyenv/pyenv: Simple Python version management](https://github.com/pyenv/pyenv)
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
