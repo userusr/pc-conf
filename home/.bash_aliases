@@ -1,5 +1,7 @@
 alias tmux='TERM=screen-256color tmux'
 
+alias osupg='apt update && apt dist-upgrade -y && apt autoremove -y'
+
 ax_backup() {
     if [ "$#" -ne 1 ]; then
         echo "Illegal number of parameters"
