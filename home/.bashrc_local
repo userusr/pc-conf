@@ -10,6 +10,9 @@ export PERL_LOCAL_LIB_ROOT="/home/${USER}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LO
 export PERL_MB_OPT="--install_base \"/home/${USER}/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/${USER}/perl5"
 
+# perlbrew
+[ -f /home/${USER}/perl5/perlbrew/etc/bashrc ] && source /home/${USER}/perl5/perlbrew/etc/bashrc
+
 # export PATH="/home/${USER}/anaconda3/bin:$PATH"
 
 [ -f /home/${USER}/Programms/texlive2017/bin/x86_64-linux ] && export PATH=/home/${USER}/Programms/texlive2017/bin/x86_64-linux:${PATH}
