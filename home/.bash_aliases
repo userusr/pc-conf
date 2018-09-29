@@ -1,6 +1,6 @@
 alias tmux='TERM=screen-256color tmux'
 
-alias osupg='apt update && apt dist-upgrade -y && apt autoremove -y'
+alias osupg='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
 
 ax_backup() {
     if [ "$#" -ne 1 ]; then
