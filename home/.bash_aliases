@@ -17,5 +17,5 @@ ax_backup() {
     local arc_name="$(pwd)/${name}_$(date +%Y%m%d%H%M%S).backup.tar.xz"
 
     cd "$(dirname "$1")"
-    tar -l pxz -cvf "${arc_name}" "${name}"/
+    tar -I pxz -cvf "${arc_name}" "${name}"/
 }
