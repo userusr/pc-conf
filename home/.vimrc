@@ -118,7 +118,7 @@ Plugin 'tpope/vim-surround'
 " If syntax errors are detected, the user is notified and is happy because they
 " didn't have to compile their code or execute their script to find them.
 "   sudo apt install python3-pep8 pylint3 python3-flake8
-"   sudo pip3 install pylama python-gflags
+"   sudo pip3 install pylama python-gflags pydocstyle mypy
 Plugin 'scrooloose/syntastic'
 " There are mappings which are simply short normal mode aliases for commonly
 " used ex commands. ]q is :cnext. [q is :cprevious. ]a is :next. [b is
@@ -419,7 +419,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_python_checkers = ['pylama']
+let g:syntastic_python_checkers = ['pylama', 'mypy']
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
