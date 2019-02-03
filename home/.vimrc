@@ -446,6 +446,13 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 " autopep8
 let g:autopep8_disable_show_diff=1
 let g:autopep8_max_line_length=120
+
+" Usefull Tabular regex for formatting YAML files
+" Tab /[0-9a-z_\-]\+:/l1
+
+" textwidth 80 chars for Markdown files
+" usefull for auto text formatting with gq shortcut
+au BufRead,BufNewFile *.md setlocal textwidth=80
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 " run :Tidy on entire buffer and return cursor to (approximate) original position
