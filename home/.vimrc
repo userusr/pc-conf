@@ -191,6 +191,8 @@ Plugin 'mtscout6/vim-tagbar-css'
 " python
 " $ sudo pip3 install autopep8
 Plugin 'tell-k/vim-autopep8'
+" $ sudo pip3 install yapf
+Plugin 'google/yapf', { 'rtp': 'plugins/vim'  }
 " colors
 Plugin 'damage220/solas.vim'
 Plugin 'nanotech/jellybeans.vim'
