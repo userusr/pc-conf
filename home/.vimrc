@@ -421,7 +421,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_python_checkers = ['pylama', 'mypy']
+let g:syntastic_python_checkers = ['mypy', 'pylint', 'flake8']
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
@@ -466,9 +466,12 @@ fun DoTidy()
 endfun
 " Tidy python files
 fun DoPyTidy()
+	let l = line(".")
+	let c = col(".")
     :Isort
-    call Autopep8()
+    :YAPF
     :write
+	call cursor(l, c)
 endfun
 " shortcut for normal mode to run on entire buffer then return to current line
 au Filetype perl nmap <leader>pt :call DoTidy()<CR>
