@@ -9,6 +9,9 @@
 " Docs
 " https://code.djangoproject.com/wiki/UsingVimWithDjango
 "
+" Install all packages
+" cat .vimrc | grep -P '^"\s+sudo\s+apt' | sed 's/^\"\s\+sudo\s\+apt\s\+install\s\+\(.*\)$/\1/g' | xargs apt install -y
+"
 set nocompatible
 filetype off
 
@@ -39,7 +42,7 @@ Plugin 'majutsushi/tagbar'
 " the [Control-]] ctrl_mapping mapping.
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
-" sudo apt-get install build-essential cmake python-dev python3-dev
+" sudo apt install build-essential cmake python-dev python3-dev
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
 Plugin 'valloric/youcompleteme'
@@ -63,7 +66,7 @@ Plugin 'davidhalter/jedi-vim'
 " under Python 3:
 "   let g:vim_isort_python_version = 'python3'
 "
-"    sudo pip3 install isort setuptools
+" sudo apt install python3-isort python3-setuptools
 Plugin 'fisadev/vim-isort'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -109,8 +112,8 @@ Plugin 'tpope/vim-surround'
 " ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
 " 0.2.0+ and Vim 8 while you edit your text files.
 "   sudo apt install python3-pep8 pylint3 python3-flake8 yamllint
-"   sudo pip3 install pylama python-gflags mypy pyre-check prospector
-"   sudo pip3 install pycodestyle
+"   sudo apt install python3-pylama python3-gflags python3-mypy
+"   sudo apt install python3-pycodestyle
 "Plugin 'w0rp/ale'
 " Syntastic is a syntax checking plugin for Vim created by Martin Grenfell. It
 " runs files through external syntax checkers and displays any resulting errors
@@ -118,7 +121,7 @@ Plugin 'tpope/vim-surround'
 " If syntax errors are detected, the user is notified and is happy because they
 " didn't have to compile their code or execute their script to find them.
 "   sudo apt install python3-pep8 pylint3 python3-flake8
-"   sudo pip3 install pylama python-gflags pydocstyle mypy
+"   sudo apt install python3-pylama python3-gflags python3-pydocstyle python3-mypy
 Plugin 'scrooloose/syntastic'
 " There are mappings which are simply short normal mode aliases for commonly
 " used ex commands. ]q is :cnext. [q is :cprevious. ]a is :next. [b is
@@ -189,9 +192,9 @@ Plugin 'perl-support.vim'
 " css
 Plugin 'mtscout6/vim-tagbar-css'
 " python
-" $ sudo pip3 install autopep8
+" $ sudo apt install python-autopep8
 Plugin 'tell-k/vim-autopep8'
-" $ sudo pip3 install yapf
+" $ sudo apt install python3-yapf
 Plugin 'google/yapf', { 'rtp': 'plugins/vim'  }
 " colors
 Plugin 'damage220/solas.vim'
