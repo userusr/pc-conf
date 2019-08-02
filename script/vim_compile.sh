@@ -9,6 +9,7 @@
 #
 # Tested on:
 #   - LinuxMint 18.3 (17.07.2018)
+#   - LinuxMint 19.1 (02.08.2019)
 
 vim_source_dir=~/.vim/vim_source
 
@@ -25,7 +26,8 @@ sudo apt purge $(dpkg-query -f '${binary:Package}\n' -W | grep "^vim-.*") \
 
 sudo apt install liblua5.1-0-dev luajit libluajit-5.1-dev python-dev ruby-dev \
     libperl-dev libncurses5-dev libatk1.0-dev libx11-dev libxpm-dev libxt-dev \
-    python3-dev git
+    python3-dev git libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev \
+    libbonoboui2-dev libcairo2-dev
 
 # Install the "checkinstall" tool so the "make install" step is
 # wrapped and the result is a .deb file that can be removed later by
@@ -51,9 +53,10 @@ make clean \
     --enable-luainterp \
     --with-luajit \
     --enable-cscope \
-    --enable-gui=auto \
     --with-features=huge \
     --with-x \
+    --enable-gui \
+    --enable-gui=gnome2 \
     --enable-fontset \
     --enable-largefile \
     --disable-netbeans \
