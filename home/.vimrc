@@ -343,17 +343,10 @@ let mapleader=","
 syntax on
 set background=dark
 if has('gui_running')
+    set t_md=
     colorscheme zenburn
     " colorscheme base16-default-dark
-else
-    set t_Co=256
-    colorscheme zenburn
 
-    " let base16colorspace=256
-    " colorscheme base16-default-dark
-endif
-
-if has("gui_running")
     if has("unix")
         set guifont=DejaVu\ Sans\ Mono\ Book\ 11
         " set guifont=Monospace\ Regular\ 12
@@ -362,6 +355,12 @@ if has("gui_running")
     elseif has ("win32")
         set guifont=Consolas:h11
     endif
+else
+    set t_Co=256
+    colorscheme zenburn
+
+    " let base16colorspace=256
+    " colorscheme base16-default-dark
 endif
 
 " set laststatus=2
@@ -496,7 +495,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_python_checkers = ['python3', 'mypy', 'pylint', 'flake8']
+let g:syntastic_python_checkers = ['python3', 'mypy', 'flake8', 'pylint' ]
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
