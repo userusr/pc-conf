@@ -27,19 +27,19 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 " Comment functions so powerful—no comment necessary.
 Plugin 'scrooloose/nerdcommenter'
-" Tagbar is a Vim plugin that provides an easy way to browse the tags of the current
-" file and get an overview of its structure. It does this by creating a sidebar that
-" displays the ctags-generated tags of the current file, ordered by their scope.
-" This means that for example methods in C++ are displayed under the class they are
-" defined in.
+" Tagbar is a Vim plugin that provides an easy way to browse the tags of the
+" current file and get an overview of its structure. It does this by creating
+" a sidebar that displays the ctags-generated tags of the current file,
+" ordered by their scope.  This means that for example methods in C++ are
+" displayed under the class they are defined in.
 Plugin 'majutsushi/tagbar'
-" Vim vim has long been my favorite text editor and combined with [Exuberant Ctags]
-" exctags it has the potential to provide most of what I expect from an [integrated
-" development environment] ide. Exuberant Ctags is the latest incarnation of a
-" [family of computer programs] ctags that scan source code files to create an index
-" of identifiers (tags) and where they are defined. Vim uses this index (a so-called
-" tags file) to enable you to jump to the definition of any identifier using
-" the [Control-]] ctrl_mapping mapping.
+" Vim vim has long been my favorite text editor and combined with [Exuberant
+" Ctags] exctags it has the potential to provide most of what I expect from an
+" [integrated development environment] ide. Exuberant Ctags is the latest
+" incarnation of a [family of computer programs] ctags that scan source code
+" files to create an index of identifiers (tags) and where they are defined.
+" Vim uses this index (a so-called tags file) to enable you to jump to the
+" definition of any identifier using the [Control-]] ctrl_mapping mapping.
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 " sudo apt install build-essential cmake python-dev python3-dev
@@ -114,7 +114,7 @@ Plugin 'tpope/vim-surround'
 "   sudo apt install python3-pep8 pylint3 python3-flake8 yamllint
 "   sudo apt install python3-pylama python3-gflags python3-mypy
 "   sudo apt install python3-pycodestyle
-"Plugin 'w0rp/ale'
+" Plugin 'w0rp/ale'
 " Syntastic is a syntax checking plugin for Vim created by Martin Grenfell. It
 " runs files through external syntax checkers and displays any resulting errors
 " to the user. This can be done on demand, or automatically as files are saved.
@@ -196,7 +196,14 @@ Plugin 'mtscout6/vim-tagbar-css'
 Plugin 'tell-k/vim-autopep8'
 " $ sudo apt install python3-yapf
 Plugin 'google/yapf', { 'rtp': 'plugins/vim'  }
+" Black is the uncompromising Python code formatter
+" $ sudo apt install python3-venv
+Plugin 'psf/black'
+" The plug-in visualizes undo history and makes it easier to browse and switch
+" between different undo branches.
+Plugin 'mbbill/undotree'
 " colors
+Plugin 'chriskempson/base16-vim'
 Plugin 'damage220/solas.vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mhartington/oceanic-next'
@@ -206,9 +213,10 @@ Plugin 'jnurmine/Zenburn'
 " Plugins to see
 "
 " endwise.vim
-" This is a simple plugin that helps to end certain structures automatically. In Ruby, this means
-" adding end after if, do, def and several other keywords. In Vimscript, this amounts to appropriately
-" adding endfunction, endif, etc. There's also Bourne shell, Z shell, VB (don't ask), C/C++ preprocessor,
+" This is a simple plugin that helps to end certain structures automatically.
+" In Ruby, this means adding end after if, do, def and several other keywords.
+" In Vimscript, this amounts to appropriately adding endfunction, endif, etc.
+" There's also Bourne shell, Z shell, VB (don't ask), C/C++ preprocessor,
 " Lua, Elixir, Haskell, Objective-C, Matlab, Crystal and Jinja templates support.
 " Plugin 'tpope/vim-endwise.git'
 "
@@ -274,6 +282,8 @@ set ignorecase
 " When off a buffer is unloaded when it is abandoned.  When on a
 " buffer becomes hidden when it is abandoned.
 set hidden
+" Highlight at 80 char by default.
+set colorcolumn=80
 " When there is a previous search pattern, highlight all its matches.
 set hlsearch
 " While typing a search command, show where the pattern, as it was typed
@@ -311,6 +321,8 @@ set foldenable
 " |fold-syntax|	syntax	    Syntax highlighting items specify folds.
 " |fold-diff|	diff	    Fold text that is not changed.
 set foldmethod=indent
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 " This option changes how text is displayed.  It doesn't change the text
 " in the buffer, see 'textwidth' for that.
 set nowrap
@@ -318,20 +330,39 @@ set nowrap
 " Useful to always start editing with all folds closed (value zero),
 " some folds closed (one) or no folds closed (99).
 set foldlevelstart=2
+" Access your system clipboard
+set clipboard=unnamed
 " "вечная" отмена изменений
 " http://funix.ru/programs_utilities/ispolzovanie-vim-v-povsednevnoj-rabote.html
-set undofile
 set undodir=~/.vim/undo/
+set undofile
 " <leader>
 let mapleader=","
+
 " colors
 syntax on
-let g:solarized_termcolors=256
-set t_Co=256
-" set background=light
 set background=dark
-" colorscheme solarized
-colorscheme zenburn
+if has('gui_running')
+    colorscheme zenburn
+    " colorscheme base16-default-dark
+else
+    set t_Co=256
+    colorscheme zenburn
+
+    " let base16colorspace=256
+    " colorscheme base16-default-dark
+endif
+
+if has("gui_running")
+    if has("unix")
+        set guifont=DejaVu\ Sans\ Mono\ Book\ 11
+        " set guifont=Monospace\ Regular\ 12
+        " set guifont=Ubuntu\ Mono\ Regular\ 13
+        set lines=60 columns=212 linespace=0
+    elseif has ("win32")
+        set guifont=Consolas:h11
+    endif
+endif
 
 " set laststatus=2
 
@@ -342,13 +373,53 @@ set pastetoggle=<F7>
 map <leader>w :wa<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable increment/decrement of numbers, which I've basically always done on
+" accident instead of on purpose.
+" https://github.com/achalddave/dotfiles/blob/master/vim/vimrc
+nnoremap <silent> <C-a> <Nop>
+vnoremap <silent> <C-a> <Nop>
+nnoremap <silent> <C-x> <Nop>
+vnoremap <silent> <C-x> <Nop>
+
+" Backup
+" https://github.com/achalddave/dotfiles/blob/master/vim/vimrc
+set backup
+" Force backups to be copied, rather than renaming the active file to the
+" backup file. If backupcopy is no or auto, it seems to cause some issues with
+" NFS, where another terminal on a different machine may hold the handle to
+" the backup file instead of the updated file.
+set backupcopy=yes
+" Adding "//" at the end asks Vim to use the absolute path of the file to avoid
+" filename collisions.
+if has("win32")
+    let mybackupdir = $TEMP . "/vim-backup//"
+    let myswpdir = $TEMP . "/vim-swp//"
+elseif has("unix")
+    let mybackupdir = $HOME . "/.vim/backup//"
+    let myswpdir = $HOME . "/.vim/swp//"
+endif
+
+if !isdirectory(mybackupdir)
+    call mkdir(mybackupdir)
+endif
+if !isdirectory(myswpdir)
+    call mkdir(myswpdir)
+endif
+execute "set backupdir=".mybackupdir
+execute "set directory=".myswpdir
+
 " nerdtree
-" let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeAutoDeleteBuffer = 1
+" If set to 1, the NERD tree window will close after opening a file
+let NERDTreeQuitOnOpen = 1
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
-map 1 :NERDTreeToggle<CR>
+map <leader>nt :NERDTreeToggle<CR>
+
+" undotree
+map <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
@@ -362,8 +433,9 @@ map <C-_> <plug>NERDCommenterToggle
 let g:tagbar_sort = 0
 let g:tagbar_width = 40
 let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 let g:tagbar_iconchars = ['+', '-']
-map 7 :TagbarToggle<CR>
+map <leader>tb :TagbarToggle<CR>
 
 " vim-easytags
 set tags=tags;$HOME/.vim/tags/
@@ -421,19 +493,29 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_python_checkers = ['mypy', 'pylint', 'flake8']
+let g:syntastic_python_checkers = ['python3', 'mypy', 'pylint', 'flake8']
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {'regex': 'possibly useless use of a variable in void context'}
 let g:syntastic_pylama_args="--max-line-length=120"
+" https://stackoverflow.com/questions/20030603/vim-syntastic-how-to-disable-the-checker/21434697#21434697
+let g:syntastic_mode_map = {
+    \ 'mode': 'passive',
+    \ 'active_filetypes': [],
+    \ 'passive_filetypes': []
+\ }
+
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
-let g:airline_theme='solarized'
+" let g:airline_solarized_bg='dark'
+" let g:airline_theme='solarized'
+" let g:airline_theme='zenburn'
+let g:airline_theme='base16'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_min_count = 0
@@ -474,6 +556,7 @@ fun DoPyTidy()
     :Isort
     :YAPF
     :write
+    :SyntasticCheck
 	call cursor(l, c)
 endfun
 " shortcut for normal mode to run on entire buffer then return to current line
@@ -489,7 +572,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
-    \ textwidth=119
+    \ textwidth=79
     \ expandtab
     \ autoindent
     \ fileformat=unix
