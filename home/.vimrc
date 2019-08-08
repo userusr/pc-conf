@@ -380,6 +380,12 @@ vnoremap <silent> <C-a> <Nop>
 nnoremap <silent> <C-x> <Nop>
 vnoremap <silent> <C-x> <Nop>
 
+" Easy window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 " Backup
 " https://github.com/achalddave/dotfiles/blob/master/vim/vimrc
 set backup
@@ -448,8 +454,11 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
-let g:ycm_filetype_blacklist = { 'python' : 1 }
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_filetype_blacklist = { 'python' : 1 }
+
+" jedi-vim
+" let g:jedi#show_call_signatures = 2 " shows call signatures in the command line instead of a popup window
 
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<C-j>"
@@ -494,8 +503,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+" syntastic runs all checkers that apply
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_python_checkers = ['python3', 'mypy', 'flake8', 'pylint' ]
+let g:syntastic_python_checkers = ['python', 'mypy', 'flake8', 'pylint' ]
 let g:syntastic_javascript_checkers = ['flow']
 " [ruby - How do I fix this annoying syntastic rails error - Stack Overflow](https://stackoverflow.com/questions/29635150/how-do-i-fix-this-annoying-syntastic-rails-error)
 let g:syntastic_eruby_ruby_quiet_messages =
