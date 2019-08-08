@@ -42,6 +42,8 @@ Plugin 'majutsushi/tagbar'
 " definition of any identifier using the [Control-]] ctrl_mapping mapping.
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
+" support for writing LaTeX documents
+Plugin 'lervag/vimtex'
 " sudo apt install build-essential cmake python-dev python3-dev
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
