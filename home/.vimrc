@@ -229,6 +229,9 @@ Plugin 'jnurmine/Zenburn'
 call vundle#end()
 filetype plugin indent on
 
+" $ wget -P ~/.vim/spell/ ftp://ftp.vim.org/pub/vim/runtime/spell/en.*
+" $ wget -P ~/.vim/spell/ ftp://ftp.vim.org/pub/vim/runtime/spell/ru.*
+set spelllang=en,ru
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=4
 " Use the appropriate number of spaces to insert a <Tab>.
@@ -505,8 +508,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-" syntastic runs all checkers that apply
-let g:syntastic_aggregate_errors = 1
+let g:syntastic_aggregate_errors = 1 " syntastic runs all checkers that apply
 let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_python_checkers = ['python', 'mypy', 'flake8', 'pylint' ]
 let g:syntastic_javascript_checkers = ['flow']
@@ -520,6 +522,7 @@ let g:syntastic_mode_map = {
     \ 'active_filetypes': [],
     \ 'passive_filetypes': []
 \ }
+map <leader>sc :SyntasticCheck<CR>
 
 
 " airline
@@ -552,29 +555,40 @@ let g:autopep8_max_line_length=120
 " textwidth 80 chars for Markdown files
 " usefull for auto text formatting with gq shortcut
 au BufRead,BufNewFile *.md setlocal textwidth=80
-" define :Tidy command to run perltidy on visual selection || entire buffer"
-command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
-" run :Tidy on entire buffer and return cursor to (approximate) original position
-fun DoTidy()
-	let l = line(".")
-	let c = col(".")
-	:Tidy
-	call cursor(l, c)
+" define :TexTidy command to run latexindent on visual selection || entire buffer"
+command -range=% -nargs=* TexTidy <line1>,<line2>!latexindent
+" define :PerlTidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* PerlTidy <line1>,<line2>!perltidy
+" run :PerlTidy on entire buffer and return cursor to (approximate) original position
+fun DoTexTidy()
+    let l = line(".")
+    let c = col(".")
+    :TexTidy
+    call cursor(l, c)
+endfun
+" run :PerlTidy on entire buffer and return cursor to (approximate) original position
+fun DoPerlTidy()
+    let l = line(".")
+    let c = col(".")
+    :PerlTidy
+    call cursor(l, c)
 endfun
 " Tidy python files
 fun DoPyTidy()
-	let l = line(".")
-	let c = col(".")
+    let l = line(".")
+    let c = col(".")
     :Isort
     :YAPF
     :write
     :SyntasticCheck
-	call cursor(l, c)
+    call cursor(l, c)
 endfun
 " shortcut for normal mode to run on entire buffer then return to current line
-au Filetype perl nmap <leader>pt :call DoTidy()<CR>
+au Filetype perl nmap <leader>pt :call DoPerlTidy()<CR>
+au Filetype tex nmap <leader>tt :call DoTexTidy()<CR>
 " shortcut for visual mode to run on the the current visual selection
-au Filetype perl vmap <leader>pt :Tidy<CR>
+au Filetype perl vmap <leader>pt :PerlTidy<CR>
+au Filetype tex vmap <leader>tt :TexTidy<CR>
 " autopep8
 au FileType python noremap <buffer> <leader>pt :call DoPyTidy()<CR>
 " https://github.com/stephpy/vim-yaml/blob/master/after/syntax/yaml.vim
