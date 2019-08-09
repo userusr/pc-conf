@@ -391,6 +391,13 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" To make navigating the file easier. This makes k and j move up and down by
+" displayed lines not file lines.
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
 " Backup
 " https://github.com/achalddave/dotfiles/blob/master/vim/vimrc
 set backup
@@ -523,7 +530,6 @@ let g:syntastic_mode_map = {
     \ 'passive_filetypes': []
 \ }
 map <leader>sc :SyntasticCheck<CR>
-
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
