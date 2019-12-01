@@ -89,7 +89,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'mileszs/ack.vim'
 " [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
 " help fzf-vim
-Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf.vim', { 'dir': '~/.fzf', 'do': './install --all' }
 " I'm not going to lie to you; fugitive.vim may very well be the best Git
 " wrapper of all time. :)
 Plugin 'tpope/vim-fugitive'
@@ -111,6 +111,8 @@ Plugin 'easymotion/vim-easymotion'
 " tags, and more. The plugin provides mappings to easily delete, change and add
 " such surroundings in pairs.
 Plugin 'tpope/vim-surround'
+" Format code with one button press (or automatically on save).
+Plugin 'Chiel92/vim-autoformat'
 " ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
 " 0.2.0+ and Vim 8 while you edit your text files.
 "   sudo apt install python3-pep8 pylint3 python3-flake8 yamllint
@@ -445,6 +447,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " https://stackoverflow.com/questions/9051837/how-to-map-c-to-toggle-comments-in-vim
 map <C-_> <plug>NERDCommenterToggle
+imap <C-_> <esc><plug>NERDCommenterToggle<space>a
 
 " tagbar
 let g:tagbar_sort = 0
@@ -470,7 +473,9 @@ nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_filetype_blacklist = { 'python' : 1 }
 
 " jedi-vim
-" let g:jedi#show_call_signatures = 2 " shows call signatures in the command line instead of a popup window
+let g:jedi#show_call_signatures = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#smart_auto_mappings = 1
 
 " ultisnips
 let g:UltiSnipsExpandTrigger       = "<C-j>"
@@ -529,7 +534,9 @@ let g:syntastic_mode_map = {
     \ 'active_filetypes': [],
     \ 'passive_filetypes': []
 \ }
-map <leader>sc :SyntasticCheck<CR>
+map <leader>sc :write<CR> :SyntasticCheck<CR>
+" Debug Syntastic
+" :let g:syntastic_debug=3
 
 " airline
 " [ryanoasis/nerd-fonts: Iconic font aggregator](https://github.com/ryanoasis/nerd-fonts)
@@ -554,6 +561,16 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 " autopep8
 let g:autopep8_disable_show_diff=1
 let g:autopep8_max_line_length=120
+
+" autoformat
+" To disable the fallback to vim's indent file, retabbing and removing
+" trailing whitespace, set the following variables to 0.
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+" To print the currently selected formatter use :CurrentFormatter
+" Debug Autoformat
+" let g:autoformat_verbosemode=1
 
 " Usefull Tabular regex for formatting YAML files
 " Tab /[0-9a-z_\-]\+:/l1
@@ -591,7 +608,7 @@ fun DoPyTidy()
 endfun
 " shortcut for normal mode to run on entire buffer then return to current line
 au Filetype perl nmap <leader>pt :call DoPerlTidy()<CR>
-au Filetype tex nmap <leader>tt :call DoTexTidy()<CR>
+au Filetype tex nmap <leader>pt :call DoTexTidy()<CR>
 " shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <leader>pt :PerlTidy<CR>
 au Filetype tex vmap <leader>tt :TexTidy<CR>
