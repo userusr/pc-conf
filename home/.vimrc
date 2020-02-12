@@ -161,9 +161,6 @@ Plugin 'tpope/vim-repeat'
 " helper function :StripWhitespace is also provided to make whitespace cleaning
 " painless.
 Plugin 'ntpeters/vim-better-whitespace'
-" Insert or delete brackets, parens, quotes in pair.
-Plugin 'jiangmiao/auto-pairs.git'
-"
 " sudo apt install fonts-powerline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -278,7 +275,7 @@ set encoding=utf-8
 set termencoding=utf-8
 " If it contains a command that loads a new buffer, it will be loaded without
 " creating a swapfile and the 'swapfile' option will be reset.
-set noswapfile
+" set noswapfile
 " When on, splitting a window will put the new window right of the
 " current one.
 set splitright
@@ -345,6 +342,7 @@ set undodir=~/.vim/undo/
 set undofile
 " <leader>
 let mapleader=","
+let maplocalleader = "\\"
 
 " colors
 syntax on
@@ -425,7 +423,7 @@ if !isdirectory(myswpdir)
     call mkdir(myswpdir)
 endif
 execute "set backupdir=".mybackupdir
-execute "set directory=".myswpdir
+" execute "set directory=".myswpdir
 
 " nerdtree
 let NERDTreeAutoDeleteBuffer = 1
@@ -497,6 +495,7 @@ nmap <Leader>f :Files<CR>
 nmap <Leader>/ :BLines<CR>
 nmap <Leader>? :Lines<CR>
 nmap <Leader>gc :Commits<CR>
+nmap <leader>s :Snippets<CR>
 
 " fugitive.vim
 nmap <Leader>gs :Gstatus<CR>
@@ -574,6 +573,9 @@ let g:autoformat_remove_trailing_spaces = 0
 
 " Usefull Tabular regex for formatting YAML files
 " Tab /[0-9a-z_\-]\+:/l1
+
+" LaTeX filetipe by default
+let g:tex_flavor='latex'
 
 " textwidth 80 chars for Markdown files
 " usefull for auto text formatting with gq shortcut
