@@ -35,6 +35,3 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-# gitignore.io
-# https://docs.gitignore.io/install/command-line
-function gi() { curl -sL https://www.gitignore.io/api/$@ ;}

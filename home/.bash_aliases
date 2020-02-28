@@ -19,3 +19,9 @@ ax_backup() {
     cd "$(dirname "$1")"
     tar -I pxz -cvf "${arc_name}" "${name}"/
 }
+
+# gitignore.io
+# https://docs.gitignore.io/install/command-line
+gi() {
+    curl -sL https://www.gitignore.io/api/$@
+}
