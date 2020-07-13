@@ -1,4 +1,5 @@
 [alias]
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	mrh =  log --pretty='%h: %B' --first-parent --no-merges --reverse master...
 [include]
 	path = ~/.gitconfig.local
