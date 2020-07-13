@@ -42,3 +42,8 @@
     sudo add-apt-repository ppa:stebbins/handbrake-releases
     sudo apt-get update && sudo apt install handbrake
 ```
+
+## Учиться
+
+[GitHub - jlevy/the-art-of-command-line: Master the command line, in one page](https://github.com/jlevy/the-art-of-command-line)
+
